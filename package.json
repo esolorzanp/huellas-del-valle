@@ -1,0 +1,11 @@
+{
+  "name": "huellas-del-valle",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Sistema de agendamiento de citas de Huellas del Valle (Parcial 1, Seminario de Actualización, UNIAJC)",
+  "type": "module",
+  "engines": { "node": ">=20" },
+  "dependencies": {
+    "pg": "^8.13.0"
+  }
+}
