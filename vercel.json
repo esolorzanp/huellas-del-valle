@@ -1,0 +1,6 @@
+{
+  "functions": {
+    "api/agendar.js": { "maxDuration": 30 },
+    "api/agenda.js": { "maxDuration": 15 }
+  }
+}
