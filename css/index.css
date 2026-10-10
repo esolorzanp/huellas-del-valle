@@ -1,0 +1,100 @@
+    :root {
+      --papel: #f2f6f3;
+      --tarjeta: #ffffff;
+      --tinta: #183a31;
+      --tinta-suave: #4f6b62;
+      --verde: #1f6f5c;
+      --verde-suave: #ddebe5;
+      --linea: #c9d9d1;
+      --ambar: #a86a12;
+      --ambar-suave: #fbefd9;
+      --rojo: #a93c34;
+      --rojo-suave: #f7e1de;
+      --azul: #35577d;
+      --azul-suave: #e1e9f2;
+      --bs-body-font-family: 'Figtree', system-ui, sans-serif;
+      --bs-body-color: var(--tinta);
+      --bs-body-bg: var(--papel);
+      --bs-border-color: var(--linea);
+      --bs-primary: var(--verde);
+      --bs-primary-rgb: 31, 111, 92;
+      --bs-focus-ring-color: rgba(31, 111, 92, .3);
+    }
+    body { background: var(--papel); font-size: 1rem; line-height: 1.55; }
+
+    .cabecera { padding: 2.25rem 0 1.5rem; }
+    .marca { display: flex; align-items: center; gap: .75rem; }
+    .marca svg { flex: none; }
+    .marca-nombre { font-weight: 800; font-size: 1.15rem; letter-spacing: -.01em; margin: 0; }
+    .marca-lugar { color: var(--tinta-suave); font-size: .9rem; margin: 0; }
+    h1 { font-weight: 800; font-size: clamp(1.9rem, 4vw, 2.6rem); letter-spacing: -.025em; line-height: 1.1; margin: 1.5rem 0 .4rem; }
+    .entrada { color: var(--tinta-suave); max-width: 60ch; margin: 0; }
+
+    .panel { background: var(--tarjeta); border: 1px solid var(--linea); border-radius: 14px; padding: 1.5rem; }
+    .panel h2 { font-weight: 700; font-size: 1.25rem; letter-spacing: -.01em; margin: 0 0 .25rem; }
+    .panel .ayuda { color: var(--tinta-suave); font-size: .92rem; margin-bottom: 1.25rem; }
+
+    .form-label { font-weight: 600; font-size: .92rem; margin-bottom: .3rem; }
+    .form-control, .form-select { background-color: #fff; border-color: var(--linea); border-radius: 9px; padding: .55rem .75rem; }
+    .form-control:focus, .form-select:focus { border-color: var(--verde); box-shadow: 0 0 0 .2rem rgba(31,111,92,.18); }
+    .form-text { color: var(--tinta-suave); }
+    .btn-agendar { background: var(--verde); border: 0; border-radius: 10px; color: #fff; font-weight: 700; padding: .7rem 1.4rem; }
+    .btn-agendar:hover, .btn-agendar:focus-visible { background: #185a4a; color: #fff; }
+    .btn-agendar:disabled { background: #7aa596; color: #fff; }
+    .btn-suave { background: var(--verde-suave); border: 0; border-radius: 10px; color: var(--verde); font-weight: 600; }
+    .btn-suave:hover { background: #cde1d8; color: #185a4a; }
+    :focus-visible { outline: 3px solid rgba(31,111,92,.45); outline-offset: 2px; }
+
+    .casos { background: var(--verde-suave); border-radius: 10px; padding: .75rem .9rem; margin-bottom: 1.25rem; }
+    .casos label { font-size: .88rem; font-weight: 600; margin-bottom: .3rem; }
+
+    /* Resultado de la solicitud */
+    .resultado { border-radius: 12px; padding: 1rem 1.15rem; margin-top: 1.25rem; border-left: 6px solid; }
+    .resultado h3 { font-size: 1.1rem; font-weight: 800; margin: 0 0 .2rem; }
+    .resultado p { margin: 0; }
+    .resultado .cuando { font-size: .85rem; opacity: .8; margin-top: .45rem; }
+    .resultado details { margin-top: .6rem; font-size: .85rem; }
+    .resultado pre { background: rgba(255,255,255,.65); border-radius: 8px; padding: .6rem .75rem; margin: .4rem 0 0; white-space: pre-wrap; word-break: break-word; }
+    .r-confirmada { background: var(--verde-suave); border-color: var(--verde); }
+    .r-alerta { background: var(--ambar-suave); border-color: var(--ambar); }
+    .r-rechazada { background: var(--rojo-suave); border-color: var(--rojo); }
+    .r-respaldo { background: var(--azul-suave); border-color: var(--azul); }
+    .r-error { background: #eef0ef; border-color: #6c7a75; }
+
+    /* Tablero de franjas: el elemento distintivo de la página */
+    .tablero { list-style: none; padding: 0; margin: 0 0 1.5rem; }
+    .franja { display: grid; grid-template-columns: 4.5rem 1fr auto; align-items: center; gap: 1rem; padding: .8rem 0; border-bottom: 1px dashed var(--linea); }
+    .franja:last-child { border-bottom: 0; }
+    .franja-hora { font-weight: 800; font-size: 1.35rem; letter-spacing: -.02em; font-variant-numeric: tabular-nums; }
+    .cupos { display: flex; gap: .45rem; }
+    .cupo { width: 30px; height: 30px; border-radius: 50%; border: 2px solid var(--verde); display: grid; place-items: center; }
+    .cupo svg { width: 16px; height: 16px; }
+    .cupo.ocupado { background: var(--verde); }
+    .cupo.ocupado svg { fill: #fff; }
+    .cupo.libre svg { fill: none; }
+    .franja.llena .cupo { border-color: var(--rojo); }
+    .franja.llena .cupo.ocupado { background: var(--rojo); }
+    .franja.casi .cupo { border-color: var(--ambar); }
+    .franja.casi .cupo.ocupado { background: var(--ambar); }
+    .franja-libres { font-weight: 600; font-size: .92rem; text-align: right; color: var(--tinta-suave); }
+    .franja.llena .franja-libres { color: var(--rojo); }
+    .franja.casi .franja-libres { color: var(--ambar); }
+
+    .tabla-citas { --bs-table-bg: transparent; font-size: .92rem; margin: 0; }
+    .tabla-citas th { font-weight: 700; color: var(--tinta-suave); border-bottom-color: var(--linea); white-space: nowrap; }
+    .tabla-citas td { border-bottom-color: #e3ece7; vertical-align: middle; }
+    .estado { display: inline-block; border-radius: 999px; padding: .15rem .6rem; font-size: .8rem; font-weight: 700; white-space: nowrap; }
+    .e-CONFIRMADA { background: var(--verde-suave); color: var(--verde); }
+    .e-CONFIRMADA_ALERTA { background: var(--ambar-suave); color: var(--ambar); }
+    .e-CANCELADA, .e-NO_ASISTIO { background: var(--rojo-suave); color: var(--rojo); }
+    .e-ATENDIDA { background: var(--azul-suave); color: var(--azul); }
+    .vacio { color: var(--tinta-suave); padding: .75rem 0; margin: 0; }
+    .subtitulo { font-weight: 700; font-size: 1rem; margin: 0 0 .5rem; }
+    .pie { color: var(--tinta-suave); font-size: .85rem; padding: 2rem 0 2.5rem; }
+
+    @media (max-width: 575.98px) {
+      .panel { padding: 1.15rem; }
+      .franja { grid-template-columns: 3.8rem 1fr; }
+      .franja-libres { grid-column: 2; text-align: left; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

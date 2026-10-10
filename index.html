@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Huellas del Valle · Agenda de citas</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/index.css" rel="stylesheet">
+</head>
+<body>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true">
+    <symbol id="huella" viewBox="0 0 24 24">
+      <ellipse cx="6" cy="9" rx="2.2" ry="2.8"/>
+      <ellipse cx="10" cy="5.2" rx="2.2" ry="2.8"/>
+      <ellipse cx="14.5" cy="5.2" rx="2.2" ry="2.8"/>
+      <ellipse cx="18.4" cy="9" rx="2.2" ry="2.8"/>
+      <path d="M12.2 11.2c-3.4 0-6.4 4-6.4 6.6 0 2 1.6 2.9 3.2 2.9 1.4 0 2.1-.7 3.2-.7s1.8.7 3.2.7c1.6 0 3.2-.9 3.2-2.9 0-2.6-3-6.6-6.4-6.6z"/>
+    </symbol>
+  </svg>
+
+  <div class="container" style="max-width: 1180px;">
+    <header class="cabecera">
+      <div class="marca">
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="#1f6f5c" aria-hidden="true"><use href="#huella"/></svg>
+        <div>
+          <p class="marca-nombre">Huellas del Valle</p>
+          <p class="marca-lugar">Clínica veterinaria, Cali</p>
+        </div>
+      </div>
+      <h1>Agenda de citas</h1>
+      <p class="entrada">Pide la cita y el sistema revisa la franja en el momento: te dice si quedó confirmada, si la franja se está llenando o por qué no se pudo agendar.</p>
+    </header>
+
+    <main class="row g-4">
+      <section class="col-lg-5" aria-labelledby="titulo-agendar">
+        <div class="panel">
+          <h2 id="titulo-agendar">Agendar una cita</h2>
+          <p class="ayuda">Todos los campos son obligatorios, menos el celular.</p>
+
+          <div class="casos">
+            <label for="caso" class="form-label">Datos de prueba del parcial</label>
+            <select id="caso" class="form-select form-select-sm">
+              <option value="">Llenar el formulario con un caso…</option>
+              <option value="C1">C1 · Luna, consulta general, 14 oct 08:00</option>
+              <option value="C2">C2 · Michi, vacunación, 14 oct 10:00</option>
+              <option value="C3">C3 · Rocky, baño, 14 oct 11:00</option>
+              <option value="C4">C4 · Pelusa, consulta general, 20 oct 08:00</option>
+              <option value="C5">C5 · Luna, baño, 14 oct 09:00</option>
+            </select>
+          </div>
+
+          <form id="form-cita" novalidate>
+            <div class="row g-3">
+              <div class="col-12">
+                <label for="propietario" class="form-label">Nombre del dueño</label>
+                <input id="propietario" name="propietario" class="form-control" autocomplete="name" required maxlength="120">
+              </div>
+              <div class="col-sm-7">
+                <label for="correo" class="form-label">Correo</label>
+                <input id="correo" name="correo" type="email" class="form-control" autocomplete="email" required maxlength="160">
+              </div>
+              <div class="col-sm-5">
+                <label for="celular" class="form-label">Celular</label>
+                <input id="celular" name="celular" type="tel" inputmode="numeric" class="form-control" autocomplete="tel" maxlength="15">
+              </div>
+              <div class="col-sm-7">
+                <label for="mascota" class="form-label">Nombre de la mascota</label>
+                <input id="mascota" name="mascota" class="form-control" required maxlength="80">
+              </div>
+              <div class="col-sm-5">
+                <label for="especie" class="form-label">Especie</label>
+                <select id="especie" name="especie" class="form-select" required>
+                  <option value="perro">Perro</option>
+                  <option value="gato">Gato</option>
+                </select>
+              </div>
+              <div class="col-12">
+                <label for="servicio" class="form-label">Servicio</label>
+                <select id="servicio" name="servicio" class="form-select" required>
+                  <option>Consulta general</option>
+                  <option>Vacunación</option>
+                  <option>Baño</option>
+                  <option>Ecografía</option>
+                </select>
+              </div>
+              <div class="col-7">
+                <label for="fecha" class="form-label">Fecha</label>
+                <input id="fecha" name="fecha" type="date" class="form-control" required value="2026-10-14">
+              </div>
+              <div class="col-5">
+                <label for="hora" class="form-label">Hora</label>
+                <select id="hora" name="hora" class="form-select" required></select>
+              </div>
+            </div>
+            <div class="d-flex align-items-center gap-3 mt-4">
+              <button id="btn-agendar" type="submit" class="btn btn-agendar">Agendar cita</button>
+              <span id="enviando" class="text-secondary small" role="status" hidden>Revisando la franja…</span>
+            </div>
+          </form>
+
+          <div id="resultado" aria-live="polite"></div>
+        </div>
+      </section>
+
+      <section class="col-lg-7" aria-labelledby="titulo-agenda">
+        <div class="panel">
+          <div class="d-flex flex-wrap align-items-end justify-content-between gap-3 mb-3">
+            <div>
+              <h2 id="titulo-agenda">Agenda del día</h2>
+              <p class="ayuda mb-0">Cupos de cada franja y las citas registradas.</p>
+            </div>
+            <form id="form-agenda" class="d-flex gap-2" novalidate>
+              <label for="fecha-agenda" class="visually-hidden">Fecha de la agenda</label>
+              <input id="fecha-agenda" type="date" class="form-control" value="2026-10-14" required>
+              <button type="submit" class="btn btn-suave text-nowrap">Ver agenda</button>
+            </form>
+          </div>
+
+          <p class="subtitulo">Franjas</p>
+          <ul id="tablero" class="tablero" aria-label="Franjas y cupos"></ul>
+
+          <p class="subtitulo">Citas</p>
+          <div class="table-responsive">
+            <table class="table tabla-citas">
+              <thead>
+                <tr><th>Hora</th><th>Mascota</th><th>Servicio</th><th>Dueño</th><th>Estado</th><th>Pedida</th></tr>
+              </thead>
+              <tbody id="citas"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="pie">Parcial 1, Seminario de Actualización, UNIAJC. Las solicitudes se procesan con Make y se guardan en PostgreSQL.</footer>
+  </div>
+
+  <script src="js/index.js"></script>
+</body>
+</html>
